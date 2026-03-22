@@ -259,3 +259,183 @@ Rules Check). To do this, hit **Q** and click on any unconnected pin. You will
 see a small X appear on the pin, telling KiCad to ignore it.
 
 Do this for any remaining unconnected pins on the ESP32 and SX1262.
+
+# PCB Section
+
+Now that our schematic is complete, we can move on to the PCB layout. But first,
+we need to assign footprints to all of our components. A footprint is the physical
+shape and pad layout of a component on the PCB — it tells KiCad how big each part
+is and where its pads are.
+
+In the schematic editor, hit **Tools > Assign Footprints** to open the footprint
+assignment window. Here is what to assign for each component:
+
+| Component | Footprint Library | Footprint |
+|-----------|------------------|-----------|
+| ESP32-S3-WROOM-1 | RF_Module | ESP32-S3-WROOM-1 |
+| SX1262 | Package_DFN_QFN | QFN-24_4x4mm_P0.5mm |
+| AMS1117-3.3 | Package_TO_SOT_SMD | SOT-223-3_TabPin2 |
+| USB-C Connector | Connector_USB | USB_C_Receptacle_GCT_USB4085 |
+| U.FL Connector | Connector_Coaxial | U.FL_Hirose_U.FL-R-SMT-1_Vertical |
+| Buttons | Button_Switch_SMD | SW_SPST_B3U-1000P |
+| Resistors | Resistor_SMD | R_0402_1005Metric |
+| Capacitors | Capacitor_SMD | C_0402_1005Metric |
+| Inductor | Inductor_SMD | L_0402_1005Metric |
+
+Once all footprints are assigned, hit **OK** and then open the PCB editor from
+the main project page. Hit **F8** (sometimes **FN+F8**) to import all of your
+components. You should see a pile of components appear in the editor, ready to
+be placed. Pop them anywhere for now, we can deal with them later.
+This is what it should look like:
+<img width="620" height="602" alt="image" src="https://github.com/user-attachments/assets/57a2a2f2-8ce7-459e-a798-92a0e2feec8a" />
+
+Before we continue, I need to explain layers.
+
+## Layers
+If you look on the right in the PCB editor, you will see the layer list. Think of each layer as a sheet of paper, and when you stack them together and put light underneath they combine into one. Most of these you can ignore.
+<img width="233" height="486" alt="image" src="https://github.com/user-attachments/assets/eadc251a-163c-457f-9a2a-75f3be2b87ba" />
+The only layers we really need to worry about is **F.Cu**, **B.Cu**, **F.Silkscreen**, and **Edge.Cuts**. The first one we are going to use is **Edge.Cuts**. Click on it in the layer browser, and you can now start drawing. Cuts is the layer which tells the PCB manufacturer how to cut the raw circuit board into the shape we want. You can use the line and curve tools in the bottom left to draw whatever shape you want! Play around with it! I am going to make a simple rectangle for the sake of this tutorial. 
+
+<img width="341" height="752" alt="image" src="https://github.com/user-attachments/assets/b3ee273c-9fad-4435-ae68-fce2458fc7a8" />
+
+After you finish Cuts, you need to place your components onto Cuts. 
+
+## Placing Components
+
+Start with the ESP32, it is the biggest one. I placed it at the top. You also need to make sure the keep-out zone is outside of Cuts, like this: 
+
+<img width="462" height="863" alt="image" src="https://github.com/user-attachments/assets/30075d3d-3b60-4aa0-a033-2f3adb5738c0" />
+
+Next, we will place the USB-C port. Make sure where it says "PCB Edge" it lines up with Cuts.
+
+<img width="654" height="516" alt="image" src="https://github.com/user-attachments/assets/d83f8485-b6bd-4081-ad87-da25693f1506" />
+
+Now, we will do the SX1262 and the antenna port. We need to make sure they are close together, otherwise the radio can be erratic.
+
+<img width="583" height="411" alt="image" src="https://github.com/user-attachments/assets/32fad393-22b1-49ae-9e37-c89c42894b94" />
+
+The power system should be close together, so place the AMS1117 somewhere near the USB-C port. Place the switches near the microcontroller, and you are almost done!
+
+## Placing Decoupling Capacitors
+
+Now that all the major components are placed, we need to place the decoupling
+capacitors close to their chips. Remember from earlier -- decoupling caps need
+to be as close as possible to the pins they are decoupling. Zoom in on the
+SX1262 and drag each capacitor to be right next to it. Do the same for the
+AMS1117. The inductor for DCC_SW should also be placed right next to the SX1262. Refer to the schematic to see what capacitors go where
+
+<img width="728" height="707" alt="image" src="https://github.com/user-attachments/assets/c32960ea-3d65-4631-b1da-ffa761d6db2a" />
+
+
+## Ratsnest (Airwires)
+
+You may have noticed thin lines connecting your components. These are called
+**ratsnest lines** or **airwires**. They are not real copper traces -- they are
+just KiCad showing you which pads need to be connected based on your schematic.
+Your job during routing is to replace every single ratsnest line with a real
+copper trace. When all ratsnest lines are gone, your board is fully routed.
+
+<img width="324" height="422" alt="image" src="https://github.com/user-attachments/assets/1391f171-89ab-4498-8092-4ddd99aa4ab2" />
+
+
+## Routing Traces
+
+Now it is time to draw the actual copper. Select the **F.Cu** layer in the layer
+panel on the right. Hit **X** to start the route trace tool. Click on a pad to
+start a trace, and click on the destination pad to finish it. KiCad will snap to
+the ratsnest lines to help guide you.
+
+A few important rules to follow:
+
+- **Power traces (3.3V, 5V, GND)** -- make these wider, at least 0.5mm. They
+carry more current than signal traces.
+- **Signal traces (SPI, control pins)** -- 0.2mm is fine for these.
+- **RF trace (RFO to U.FL)** -- keep this as short and straight as possible.
+No sharp 90 degree corners, use 45 degree angles instead.
+- **Never route traces under the ESP32 antenna area** -- there is a keepout zone
+on the ESP32 footprint for a reason. Copper under the antenna will detune it and
+reduce your range.
+
+To change trace width, right click while routing and select **Width**.
+
+<img width="187" height="147" alt="image" src="https://github.com/user-attachments/assets/b6de7365-bcbc-47ac-9dd3-4f79a194e6d7" />
+
+<img width="398" height="371" alt="image" src="https://github.com/user-attachments/assets/83cf4152-9507-4b20-8cee-40354eb25d3c" />
+
+### Routing Order
+
+Route in this order to keep things manageable:
+
+1. GND connections first -- there will be a lot of them, but most will be handled
+by the ground plane in the next step so do not worry about all of them yet.
+2. Power traces -- 3.3V and 5V
+3. SPI and control signals between ESP32 and SX1262
+4. USB data lines (D+ and D-)
+5. RF trace last -- it is the most sensitive
+
+[SCREENSHOT: Board with all non-ground traces routed, ratsnest lines mostly gone]
+
+## Ground Plane
+
+Instead of routing every single GND connection by hand, we can use a **ground
+plane** -- a flood of copper that covers the entire board and automatically
+connects to every GND pad. This is standard practice on almost every PCB, and
+it also helps with RF performance.
+
+To add a ground plane:
+
+1. Select **F.Cu** in the layer panel
+2. Hit **Z** to open the Add Filled Zone tool (or go to **Place > Add Rule Area**)
+3. Click the four corners of your board outline to draw the zone boundary
+4. In the dialog that opens, make sure the net is set to **GND** and hit **OK**
+5. Hit **B** to fill all zones -- you will see the copper flood appear
+
+Repeat the same process for **B.Cu** to add a ground plane on the back of the
+board too. Having ground planes on both sides improves RF shielding and gives
+your decoupling caps a short path to ground.
+
+<img width="284" height="621" alt="image" src="https://github.com/user-attachments/assets/7e262055-444a-4be6-adc3-687c9b171d74" />
+
+
+After filling, you may notice some ratsnest lines disappeared -- those were GND
+connections that are now handled by the ground plane.
+
+## Design Rule Check (DRC)
+
+Before we export, we need to run the **DRC** (Design Rule Check). This is
+KiCad's automated checker that looks for problems like traces that are too close
+together, unconnected pads, or copper that overlaps where it should not.
+
+Go to **Inspect > Design Rules Checker** and hit **Run DRC**. Ideally you want
+zero errors. Warnings are usually fine to ignore for a first board.
+
+<img width="690" height="545" alt="image" src="https://github.com/user-attachments/assets/e993b636-87d3-463c-9c0e-c2c978e59d06" />
+
+## Exporting Gerbers for JLCPCB
+
+Gerber files are the industry standard format that PCB manufacturers use to
+actually make your board. Here is how to export them for JLCPCB:
+
+1. Go to **File > Fabrication Outputs > Gerbers (.gbr)**
+2. In the dialog, make sure the following layers are checked:
+   - F.Cu
+   - B.Cu
+   - F.Paste
+   - B.Paste
+   - F.Silkscreen
+   - B.Silkscreen
+   - F.Mask
+   - B.Mask
+   - Edge.Cuts
+3. Hit **Plot**
+4. Then hit **Generate Drill Files** and hit **Generate Drill File**
+5. Zip up the entire output folder
+
+<img width="1080" height="701" alt="image" src="https://github.com/user-attachments/assets/aa81b8cf-5e2a-40ec-a9d3-dea01df45ba0" />
+
+
+Now go to https://jlcpcb.com, hit **Order Now**, and upload your zip file. The
+default settings are fine for a first board -- 2 layers, 1.6mm thickness, and
+green soldermask. The cheapest option will get you 5 boards for a few dollars.
+
+Congratulations -- you have designed your first PCB!
