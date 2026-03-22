@@ -1,0 +1,104 @@
+** Drc report for loraguide.kicad_pcb **
+** Created on 2026-03-22T09:49:21-0500 **
+
+** Found 12 DRC violations **
+[starved_thermal]: Thermal relief connection to zone incomplete (layer B.Cu; zone min spoke count 2; actual 1)
+    Local override; error
+    @(40.0000 mm, 28.0000 mm): Zone 'GNDPOUR' [GND] on F.Cu and B.Cu, priority 0
+    @(58.8000 mm, 110.3250 mm): PTH pad B1 [GND] of J1
+[starved_thermal]: Thermal relief connection to zone incomplete (layer B.Cu; zone min spoke count 2; actual 1)
+    Local override; error
+    @(40.0000 mm, 28.0000 mm): Zone 'GNDPOUR' [GND] on F.Cu and B.Cu, priority 0
+    @(52.8500 mm, 110.3250 mm): PTH pad B12 [GND] of J1
+[starved_thermal]: Thermal relief connection to zone incomplete (layer F.Cu; zone min spoke count 2; actual 1)
+    Local override; error
+    @(40.0000 mm, 28.0000 mm): Zone 'GNDPOUR' [GND] on F.Cu and B.Cu, priority 0
+    @(77.4750 mm, 111.9750 mm): Pad 2 [GND] of J2 on F.Cu
+[starved_thermal]: Thermal relief connection to zone incomplete (layer F.Cu; zone min spoke count 2; actual 1)
+    Local override; error
+    @(40.0000 mm, 28.0000 mm): Zone 'GNDPOUR' [GND] on F.Cu and B.Cu, priority 0
+    @(58.8000 mm, 110.3250 mm): PTH pad B1 [GND] of J1
+[starved_thermal]: Thermal relief connection to zone incomplete (layer F.Cu; zone min spoke count 2; actual 1)
+    Local override; error
+    @(40.0000 mm, 28.0000 mm): Zone 'GNDPOUR' [GND] on F.Cu and B.Cu, priority 0
+    @(52.8500 mm, 110.3250 mm): PTH pad B12 [GND] of J1
+[silk_edge_clearance]: Silkscreen clipped by board edge
+    Rule: board setup constraints silk; warning
+    @(50.0000 mm, 50.0000 mm): Segment on Edge.Cuts
+    @(55.8000 mm, 50.4750 mm): Polygon of U1 on F.Silkscreen
+[silk_edge_clearance]: Silkscreen clipped by board edge
+    Rule: board setup constraints silk; warning
+    @(80.0000 mm, 115.0000 mm): Segment on Edge.Cuts
+    @(51.2300 mm, 114.9750 mm): Segment of J1 on F.Silkscreen
+[silk_edge_clearance]: Silkscreen clipped by board edge
+    Rule: board setup constraints silk; warning
+    @(80.0000 mm, 115.0000 mm): Segment on Edge.Cuts
+    @(60.4200 mm, 114.9750 mm): Segment of J1 on F.Silkscreen
+[lib_footprint_mismatch]: Footprint 'ESP32-S3-WROOM-1' does not match copy in library 'RF_Module'.
+    Local override; warning
+    @(65.0000 mm, 56.5000 mm): Footprint U1
+[lib_footprint_mismatch]: Footprint 'U.FL_Hirose_U.FL-R-SMT-1_Vertical' does not match copy in library 'Connector_Coaxial'.
+    Local override; warning
+    @(76.0000 mm, 111.5000 mm): Footprint J2
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(55.5000 mm, 102.3400 mm): Reference field of C6
+    @(53.6500 mm, 102.4100 mm): Segment of U3 on F.Silkscreen
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(62.0000 mm, 98.5000 mm): Reference field of C7
+    @(61.3600 mm, 98.6078 mm): Segment of C7 on F.Silkscreen
+
+** Found 12 unconnected pads **
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(40.0000 mm, 28.0000 mm): Zone 'GNDPOUR' [GND] on F.Cu and B.Cu, priority 0
+    @(40.0000 mm, 28.0000 mm): Zone 'GNDPOUR' [GND] on F.Cu and B.Cu, priority 0
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(40.0000 mm, 28.0000 mm): Zone 'GNDPOUR' [GND] on F.Cu and B.Cu, priority 0
+    @(40.0000 mm, 28.0000 mm): Zone 'GNDPOUR' [GND] on F.Cu and B.Cu, priority 0
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(61.0000 mm, 98.0200 mm): Pad 2 [GND] of C7 on F.Cu
+    @(40.0000 mm, 28.0000 mm): Zone 'GNDPOUR' [GND] on F.Cu and B.Cu, priority 0
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(40.0000 mm, 28.0000 mm): Zone 'GNDPOUR' [GND] on F.Cu and B.Cu, priority 0
+    @(61.0000 mm, 98.0200 mm): Pad 2 [GND] of C7 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(40.0000 mm, 28.0000 mm): Zone 'GNDPOUR' [GND] on F.Cu and B.Cu, priority 0
+    @(68.6000 mm, 104.7875 mm): Pad 20 [GND] of U2 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(70.1000 mm, 100.9125 mm): Pad 8 [GND] of U2 on F.Cu
+    @(71.2875 mm, 102.1000 mm): Pad 5 [GND] of U2 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(70.1000 mm, 100.9125 mm): Pad 8 [GND] of U2 on F.Cu
+    @(40.0000 mm, 28.0000 mm): Zone 'GNDPOUR' [GND] on F.Cu and B.Cu, priority 0
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(70.1000 mm, 100.9125 mm): Pad 8 [GND] of U2 on F.Cu
+    @(40.0000 mm, 28.0000 mm): Zone 'GNDPOUR' [GND] on F.Cu and B.Cu, priority 0
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(71.2875 mm, 102.1000 mm): Pad 5 [GND] of U2 on F.Cu
+    @(71.2875 mm, 103.6000 mm): Pad 2 [GND] of U2 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(40.0000 mm, 28.0000 mm): Zone 'GNDPOUR' [GND] on F.Cu and B.Cu, priority 0
+    @(71.2875 mm, 103.6000 mm): Pad 2 [GND] of U2 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(40.0000 mm, 28.0000 mm): Zone 'GNDPOUR' [GND] on F.Cu and B.Cu, priority 0
+    @(40.0000 mm, 28.0000 mm): Zone 'GNDPOUR' [GND] on F.Cu and B.Cu, priority 0
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(54.5000 mm, 106.0100 mm): Pad 1 [Net-(J1-CC1)] of R1 on F.Cu
+    @(54.5500 mm, 108.9750 mm): PTH pad A5 [Net-(J1-CC1)] of J1
+
+** Found 0 Footprint errors **
+
+** End of Report **
