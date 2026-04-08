@@ -1,4 +1,4 @@
-26783315046561699
+26793962282436902
 2199230-3b
 2199230-3b
 
@@ -94996,6 +94996,13 @@ WiFi IEEE802.11 b/g/n
 0
 44
 44
+RT9013-33GB
+SOT94P279X129-5N
+
+
+0
+5
+5
 Relay_SMD
 Relay_2P2T_10x6mm_TE_IMxxG
 Signal Relay, 10x6mm, 2 Form C, Gull Wings, https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Data+Sheet%7F108-98001%7FZ.1%7Fpdf%7FEnglish%7FENG_DS_108-98001_Z.1.pdf
@@ -97320,6 +97327,27 @@ rotary encoder illuminated switch vertical
 0
 9
 8
+SKRPACE010
+SW_SKRPACE010
+
+
+0
+4
+4
+SLB9670VQ20FW785XUMA1
+QFN50P500X500X90-33N
+
+
+0
+33
+33
+SMTU2032-LF
+BAT_SMTU2032-LF
+
+
+0
+2
+2
 Sensor
 ASAIR_AM2302_P2.54mm_Lead2.75mm_TabDown
 Temperature and humidity module, http://akizukidenshi.com/download/ds/aosong/AM2302.pdf
@@ -99420,6 +99448,13 @@ Logo WEEE
 0
 0
 0
+TS-1088-AR02016
+SW_TS-1088-AR02016
+
+
+0
+2
+2
 TerminalBlock
 TerminalBlock_MaiXu_MX126-5.0-02P_1x02_P5.00mm
 terminal block MaiXu MX126-5.0-02P, 2 pins, pitch 5mm, size 10.5x7.8mm, drill diameter 1.3mm, pad diameter 2.8mm, https://www.lcsc.com/datasheet/lcsc_datasheet_2309150913_MAX-MX126-5-0-03P-GN01-Cu-S-A_C5188435.pdf, script-generated using https://gitlab.com/kicad/libraries/kicad-footprint-generator/-/tree/master/scripts/TerminalBlock_MaiXu
@@ -106406,6 +106441,13 @@ Varistor VF
 0
 2
 2
+W25Q16JVSSIQ
+SOIC127P790X216-8N
+
+
+0
+8
+8
 asset_lib
 hc_bw
 
